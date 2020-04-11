@@ -80,3 +80,4 @@ C:\Users\user1\source\repos\University\ContosoUniversityData\ContosoSite\obj\Deb
 C:\Users\user1\source\repos\University\ContosoUniversityData\ContosoSite\obj\Debug\ContosoSite.csproj.CopyComplete
 C:\Users\user1\source\repos\University\ContosoUniversityData\ContosoSite\obj\Debug\ContosoSite.dll
 C:\Users\user1\source\repos\University\ContosoUniversityData\ContosoSite\obj\Debug\ContosoSite.pdb
+C:\Users\user1\source\repos\University\ContosoUniversityData\ContosoSite\obj\Debug\ContosoSite.csprojAssemblyReference.cache

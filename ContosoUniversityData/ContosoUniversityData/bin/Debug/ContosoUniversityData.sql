@@ -40,6 +40,67 @@ USE [$(DatabaseName)];
 
 
 GO
+PRINT N'Dropping [dbo].[FK_dbo.Enrollment_dbo.Student_StudentID]...';
+
+
+GO
+ALTER TABLE [dbo].[Enrollment] DROP CONSTRAINT [FK_dbo.Enrollment_dbo.Student_StudentID];
+
+
+GO
+PRINT N'Starting rebuilding table [dbo].[Student]...';
+
+
+GO
+BEGIN TRANSACTION;
+
+SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;
+
+SET XACT_ABORT ON;
+
+CREATE TABLE [dbo].[tmp_ms_xx_Student] (
+    [StudentID]      INT           IDENTITY (1, 1) NOT NULL,
+    [LastName]       NVARCHAR (50) NULL,
+    [FirstName]      NVARCHAR (50) NULL,
+    [EnrollmentDate] DATETIME      NULL,
+    [MiddleName]     NVARCHAR (50) NULL,
+    PRIMARY KEY CLUSTERED ([StudentID] ASC)
+);
+
+IF EXISTS (SELECT TOP 1 1 
+           FROM   [dbo].[Student])
+    BEGIN
+        SET IDENTITY_INSERT [dbo].[tmp_ms_xx_Student] ON;
+        INSERT INTO [dbo].[tmp_ms_xx_Student] ([StudentID], [LastName], [FirstName], [MiddleName], [EnrollmentDate])
+        SELECT   [StudentID],
+                 [LastName],
+                 [FirstName],
+                 [MiddleName],
+                 [EnrollmentDate]
+        FROM     [dbo].[Student]
+        ORDER BY [StudentID] ASC;
+        SET IDENTITY_INSERT [dbo].[tmp_ms_xx_Student] OFF;
+    END
+
+DROP TABLE [dbo].[Student];
+
+EXECUTE sp_rename N'[dbo].[tmp_ms_xx_Student]', N'Student';
+
+COMMIT TRANSACTION;
+
+SET TRANSACTION ISOLATION LEVEL READ COMMITTED;
+
+
+GO
+PRINT N'Creating [dbo].[FK_dbo.Enrollment_dbo.Student_StudentID]...';
+
+
+GO
+ALTER TABLE [dbo].[Enrollment] WITH NOCHECK
+    ADD CONSTRAINT [FK_dbo.Enrollment_dbo.Student_StudentID] FOREIGN KEY ([StudentID]) REFERENCES [dbo].[Student] ([StudentID]) ON DELETE CASCADE;
+
+
+GO
 /*
 Post-Deployment Script Template							
 --------------------------------------------------------------------------------------
@@ -90,6 +151,18 @@ WHEN NOT MATCHED BY TARGET THEN
 INSERT (Grade, CourseID, StudentID)
 VALUES (Grade, CourseID, StudentID);
 GO
+
+GO
+PRINT N'Checking existing data against newly created constraints';
+
+
+GO
+USE [$(DatabaseName)];
+
+
+GO
+ALTER TABLE [dbo].[Enrollment] WITH CHECK CHECK CONSTRAINT [FK_dbo.Enrollment_dbo.Student_StudentID];
+
 
 GO
 PRINT N'Update complete.';

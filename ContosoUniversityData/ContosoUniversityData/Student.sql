@@ -3,5 +3,6 @@
     [LastName]       NVARCHAR (50) NULL,
     [FirstName]      NVARCHAR (50) NULL,
     [EnrollmentDate] DATETIME      NULL,
+    [MiddleName] NVARCHAR(50) NULL, 
     PRIMARY KEY CLUSTERED ([StudentID] ASC)
 )
