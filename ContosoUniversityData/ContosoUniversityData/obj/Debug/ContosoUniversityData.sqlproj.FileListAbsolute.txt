@@ -3,3 +3,4 @@ C:\Users\user1\source\repos\University\ContosoUniversityData\ContosoUniversityDa
 C:\Users\user1\source\repos\University\ContosoUniversityData\ContosoUniversityData\bin\Debug\ContosoUniversityData.pdb
 C:\Users\user1\source\repos\University\ContosoUniversityData\ContosoUniversityData\obj\Debug\ContosoUniversityData.dll
 C:\Users\user1\source\repos\University\ContosoUniversityData\ContosoUniversityData\obj\Debug\ContosoUniversityData.pdb
+C:\Users\user1\source\repos\University\ContosoUniversityData\ContosoUniversityData\obj\Debug\ContosoUniversityData.sqlprojAssemblyReference.cache
