@@ -15,17 +15,25 @@ namespace ContosoSite.Controllers
         private ContosoUniversityDataEntities db = new ContosoUniversityDataEntities();
 
         // GET: Students
-        public ActionResult Index(string sortOrder)
+        public ViewResult Index(string sortOrder, string searchString)
         {
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
             var students = from s in db.Students
                            select s;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                students = students.Where(s => s.LastName.Contains(searchString)
+                                       || s.FirstName.Contains(searchString));
+            }
+
             switch (sortOrder)
             {
                 case "name_desc":
                     students = students.OrderByDescending(s => s.LastName);
                     break;
+
                 case "Date":
                     students = students.OrderBy(s => s.EnrollmentDate);
                     break;
