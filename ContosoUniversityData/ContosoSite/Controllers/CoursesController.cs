@@ -8,18 +8,25 @@ using System.Web;
 using System.Web.Mvc;
 using ContosoSite.Models;
 
+// This is the controller file for Courses
+
 namespace ContosoSite.Controllers
 {
     public class CoursesController : Controller
     {
+        // Variable to make coneection to the database
         private ContosoUniversityDataEntities db = new ContosoUniversityDataEntities();
 
+        // Called for the index page
         // GET: Courses
         public ActionResult Index()
         {
+            // Shows all courses as a list
             return View(db.Courses.ToList());
         }
 
+
+        // Called for the details page. shows the results for a partucular course
         // GET: Courses/Details/5
         public ActionResult Details(int? id)
         {
@@ -35,6 +42,8 @@ namespace ContosoSite.Controllers
             return View(course);
         }
 
+
+        // Called when you want to create a new course.
         // GET: Courses/Create
         public ActionResult Create()
         {
@@ -58,6 +67,8 @@ namespace ContosoSite.Controllers
             return View(course);
         }
 
+
+        // Called when you want to edit a course
         // GET: Courses/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -90,6 +101,7 @@ namespace ContosoSite.Controllers
         }
 
         // GET: Courses/Delete/5
+        // Called when you want to delete a course
         public ActionResult Delete(int? id)
         {
             if (id == null)

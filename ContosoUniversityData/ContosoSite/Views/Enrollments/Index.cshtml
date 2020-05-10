@@ -1,4 +1,5 @@
-﻿@model IEnumerable<ContosoSite.Models.Enrollment>
+﻿@*View page that's called when the user wants to view the enrollments home page*@
+@model IEnumerable<ContosoSite.Models.Enrollment>
 
 @{
     ViewBag.Title = "Index";
@@ -23,23 +24,24 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Grade)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Course.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Student.LastName)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.EnrollmentID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.EnrollmentID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.EnrollmentID })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Grade)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Course.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Student.LastName)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.EnrollmentID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.EnrollmentID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.EnrollmentID })
+            </td>
+        </tr>
+    }
 
 </table>

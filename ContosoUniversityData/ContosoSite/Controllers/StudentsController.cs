@@ -9,6 +9,8 @@ using System.Web.Mvc;
 using ContosoSite.Models;
 using PagedList;
 
+// This is the controller class for Students
+
 namespace ContosoSite.Controllers
 {
     public class StudentsController : Controller
@@ -16,18 +18,28 @@ namespace ContosoSite.Controllers
         private ContosoUniversityDataEntities db = new ContosoUniversityDataEntities();
 
         // GET: Students
+        // Called when the user wants to view the index page for students
         public ViewResult Index(string sortOrder, string currentFilter ,string searchString, int? page)
         {
+            /*
+             * sortOrder -> decides the order in which the date/name will be sorted
+             * currentFilter -> filter set up to view selection of results
+             * searchString -> person we are looking for
+             * page -> page we want to see.
+             * 
+             */
+
             ViewBag.CurrentSort = sortOrder;
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
 
-
+            // displays the first page if no search string entered.
             if(searchString != null)
             {
                 page = 1;
             }
 
+            // else search string is set to the current person we are trying to look for
             else
             {
                 searchString = currentFilter;
@@ -45,6 +57,7 @@ namespace ContosoSite.Controllers
                                        || s.FirstName.Contains(searchString));
             }
 
+            // to sort the person by descending/ ascending as well as the date by descending/ascending
             switch (sortOrder)
             {
                 case "name_desc":
@@ -62,12 +75,15 @@ namespace ContosoSite.Controllers
                     break;
             }
 
+
+            // default number of entries per page as well as the default page
             int pageSize = 3;
             int pageNumber = (page ?? 1);
             return View(students.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Students/Details/5
+        // called when the user wants to see the details of a particular student
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -83,6 +99,7 @@ namespace ContosoSite.Controllers
         }
 
         // GET: Students/Create
+        // called when the user wants to create a new student
         public ActionResult Create()
         {
             return View();
@@ -106,6 +123,7 @@ namespace ContosoSite.Controllers
         }
 
         // GET: Students/Edit/5
+        // called when the user wants to edit a particular student
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -137,6 +155,7 @@ namespace ContosoSite.Controllers
         }
 
         // GET: Students/Delete/5
+        // called when the user wants to delete a particular student
         public ActionResult Delete(int? id)
         {
             if (id == null)

@@ -1,4 +1,6 @@
-﻿@model ContosoSite.Models.Student
+﻿@*View page that's called when the user wants to edit a particular student*@
+
+@model ContosoSite.Models.Student
 
 @{
     ViewBag.Title = "Edit";
@@ -10,7 +12,7 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Student</h4>
         <hr />

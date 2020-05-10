@@ -1,4 +1,6 @@
-﻿@model ContosoSite.Models.Student
+﻿@*View page that's called when the user wants to create a student*@
+
+@model ContosoSite.Models.Student
 
 @{
     ViewBag.Title = "Create";
@@ -7,10 +9,10 @@
 <h2>Create</h2>
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Student</h4>
         <hr />

@@ -1,4 +1,6 @@
-﻿@model ContosoSite.Models.Student
+﻿@*View page that's called when the user wants to delete a user*@
+
+@model ContosoSite.Models.Student
 
 @{
     ViewBag.Title = "Delete";
@@ -45,7 +47,8 @@
 
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">

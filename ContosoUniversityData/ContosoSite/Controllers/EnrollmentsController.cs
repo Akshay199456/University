@@ -8,6 +8,8 @@ using System.Web;
 using System.Web.Mvc;
 using ContosoSite.Models;
 
+// This is the controller class for enrollments
+
 namespace ContosoSite.Controllers
 {
     public class EnrollmentsController : Controller
@@ -15,6 +17,7 @@ namespace ContosoSite.Controllers
         private ContosoUniversityDataEntities db = new ContosoUniversityDataEntities();
 
         // GET: Enrollments
+        // called for index page
         public ActionResult Index()
         {
             var enrollments = db.Enrollments.Include(e => e.Course).Include(e => e.Student);
@@ -22,6 +25,7 @@ namespace ContosoSite.Controllers
         }
 
         // GET: Enrollments/Details/5
+        // called when the user wants to view the details of a specific enrollment
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -37,6 +41,7 @@ namespace ContosoSite.Controllers
         }
 
         // GET: Enrollments/Create
+        // called when the user wants to create an enrollment
         public ActionResult Create()
         {
             ViewBag.CourseID = new SelectList(db.Courses, "CourseID", "Title");
@@ -64,6 +69,7 @@ namespace ContosoSite.Controllers
         }
 
         // GET: Enrollments/Edit/5
+        // called when the user wants to edit and enrollment
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -99,6 +105,7 @@ namespace ContosoSite.Controllers
         }
 
         // GET: Enrollments/Delete/5
+        // called when the user wants to delete an enrollment
         public ActionResult Delete(int? id)
         {
             if (id == null)
